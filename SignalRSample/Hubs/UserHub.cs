@@ -25,7 +25,11 @@ namespace SignalRSample.Hubs
 		{
 			TotalViews++;
 			//send update to clients that view have been updated
+			// If you need to send notification to each client
 			await Clients.All.SendAsync("UpdateTotalViews", TotalViews);
+
+			// If you need to send notification back to the request Initiator
+			//await Clients.Caller.SendAsync("UpdateTotalViews", TotalViews);
 		}
 	}
 }
