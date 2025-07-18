@@ -9,7 +9,11 @@ function WindowLoaded() {
 // Connect to methods that HUB invokes AKA Receive Notification from HUB
 connection.on("UpdateTotalViews", (totalViews) => {
 	$('#totalViews').text(totalViews);
-})
+});
+
+connection.on("UpdateTotalUsers", (totalUsers) => {
+	$('#totalUsers').text(totalUsers);
+});
 
 // Start Connection
 connection.start().then(OnSuccessConnection, OnFailedConnection);
