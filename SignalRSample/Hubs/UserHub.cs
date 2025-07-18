@@ -45,6 +45,9 @@ namespace SignalRSample.Hubs
 
 			// If you need to send notification to all tabs of one client
 			//await Clients.User("UserIdOfClient").SendAsync("UpdateTotalViews", TotalViews);
+
+			// If you need to send notification to particular users
+			//await Clients.Users("UserIdOfClient", "UserIdOfClient").SendAsync("UpdateTotalViews", TotalViews);
 		}
 	}
 }
