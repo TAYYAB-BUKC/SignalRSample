@@ -1,5 +1,5 @@
 ﻿// Create Connection
-var connection = new signalR.HubConnectionBuilder().withUrl("/hubs/user").Build();
+var connection = new signalR.HubConnectionBuilder().withUrl("/hubs/user").build();
 
 // Invoke HUB methods AKA Send Notification to HUB
 function WindowLoaded() {
