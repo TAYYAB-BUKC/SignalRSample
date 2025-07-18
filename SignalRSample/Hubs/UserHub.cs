@@ -39,6 +39,9 @@ namespace SignalRSample.Hubs
 
 			// If you need to send notification to particular clients
 			//await Clients.Clients("ConnectionIdOfClient", "ConnectionIdOfClient").SendAsync("UpdateTotalViews", TotalViews);
+
+			// If you need to send notification to all clients except particular clients
+			//await Clients.AllExcept("ConnectionIdOfClient", "ConnectionIdOfClient").SendAsync("UpdateTotalViews", TotalViews);
 		}
 	}
 }
