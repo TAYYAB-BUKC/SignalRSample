@@ -10,7 +10,7 @@ function WindowLoaded() {
 	//});
 
 	// invoke will be able to get the response from the server after calling the method
-	connection.invoke("AddView").then((value) => {
+	connection.invoke("AddView", "SignalRApp").then((value) => {
 		console.log("Using Invoke");
 		console.log(value);
 	});
