@@ -21,12 +21,14 @@ namespace SignalRSample.Hubs
 			return base.OnDisconnectedAsync(exception);
 		}
 
-		public async Task AddView()
+		public async Task<string> AddView()
 		{
 			TotalViews++;
 			//send update to clients that view have been updated
 			// If you need to send notification to each client
 			await Clients.All.SendAsync("UpdateTotalViews", TotalViews);
+
+			return $"Total Views: {TotalViews}";
 
 			// If you need to send notification back to the request Initiator
 			//await Clients.Caller.SendAsync("UpdateTotalViews", TotalViews);
