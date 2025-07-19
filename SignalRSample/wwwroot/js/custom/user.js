@@ -3,7 +3,17 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/hubs/user").build(
 
 // Invoke HUB methods AKA Send Notification to HUB
 function WindowLoaded() {
-	connection.send("AddView");
+	// send will not be able to get the response from the server after calling the method
+	//connection.send("AddView").then((value) => {
+	//	console.log("Using Send");
+	//	console.log(value);
+	//});
+
+	// invoke will be able to get the response from the server after calling the method
+	connection.invoke("AddView").then((value) => {
+		console.log("Using Invoke");
+		console.log(value);
+	});
 }
 
 // Connect to methods that HUB invokes AKA Receive Notification from HUB
