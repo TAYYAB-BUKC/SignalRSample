@@ -1,17 +1,21 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using SignalRSample.Hubs;
 using SignalRSample.Models;
+using System.Diagnostics;
 
 namespace SignalRSample.Controllers
 {
-    public class HomeController : Controller
+	public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHubContext<VotingHub> _votingHubContext; 
 
-        public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, IHubContext<VotingHub> votingHubContext)
         {
             _logger = logger;
-        }
+            _votingHubContext = votingHubContext;
+		}
 
         public IActionResult Index()
         {
@@ -29,12 +33,18 @@ namespace SignalRSample.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-		public IActionResult AddVote(string voterID)
+		public async Task<IActionResult> AddVote(string voterID)
 		{
             if (StaticDetails.StaticDetails.VoteCounts.ContainsKey(voterID))
             {
                 StaticDetails.StaticDetails.VoteCounts[voterID]++;
 			}
+
+            await _votingHubContext.Clients.All.SendAsync("UpdateVotingStatus",
+                StaticDetails.StaticDetails.VoteCounts[StaticDetails.StaticDetails.VoterA],
+                StaticDetails.StaticDetails.VoteCounts[StaticDetails.StaticDetails.VoterB],
+                StaticDetails.StaticDetails.VoteCounts[StaticDetails.StaticDetails.VoterC]
+            );
 			return Accepted();
 		}
 	}
