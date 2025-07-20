@@ -97,6 +97,7 @@ houseConnection.on("SubscriptionStatus", (joinedGroups, houseName, hasSubscribed
 			default:
 				break;
 		}
+		toastr.success(`You have subscribed to ${houseName} successfully`);
 	}
 	else {
 		switch (houseName) {
@@ -119,5 +120,6 @@ houseConnection.on("SubscriptionStatus", (joinedGroups, houseName, hasSubscribed
 			default:
 				break;
 		}
+		toastr.success(`You have unsubscribed to ${houseName} successfully`);
 	}
 });
