@@ -28,5 +28,14 @@ namespace SignalRSample.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+
+		public IActionResult AddVote(string voterID)
+		{
+            if (StaticDetails.StaticDetails.VoteCounts.ContainsKey(voterID))
+            {
+                StaticDetails.StaticDetails.VoteCounts[voterID]++;
+			}
+			return Accepted();
+		}
+	}
 }
