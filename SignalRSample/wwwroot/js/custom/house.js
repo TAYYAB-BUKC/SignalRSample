@@ -123,3 +123,11 @@ houseConnection.on("SubscriptionStatus", (joinedGroups, houseName, hasSubscribed
 		toastr.success(`You have unsubscribed to ${houseName} successfully`);
 	}
 });
+
+houseConnection.on("NewSubscriptionMessage", (message) => {
+	toastr.success(message);
+});
+
+houseConnection.on("UnsubscriptionMessage", (message) => {
+	toastr.info(message);
+});
