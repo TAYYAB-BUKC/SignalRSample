@@ -20,6 +20,8 @@ namespace SignalRSample.Hubs
 
 				var clientHouses = GetClientHouses(Context.ConnectionId);
 				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, true);
+				//await Clients.AllExcept(Context.ConnectionId).SendAsync("NewSubscriptionMessage", $"Member have subscribed to {houseName} successfully");
+				await Clients.Others.SendAsync("NewSubscriptionMessage", $"Member have subscribed to {houseName} successfully");
 
 				await Groups.AddToGroupAsync(Context.ConnectionId, houseName);
 			}
@@ -40,6 +42,9 @@ namespace SignalRSample.Hubs
 
 				var clientHouses = GetClientHouses(Context.ConnectionId);
 				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, false);
+
+				//await Clients.AllExcept(Context.ConnectionId).SendAsync("UnsubscriptionMessage", $"Member have unsubscribed to {houseName} successfully");
+				await Clients.Others.SendAsync("UnsubscriptionMessage", $"Member have unsubscribed to {houseName} successfully");
 
 				await Groups.RemoveFromGroupAsync(Context.ConnectionId, houseName);
 			}
