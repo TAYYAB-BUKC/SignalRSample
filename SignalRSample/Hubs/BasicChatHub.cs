@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SignalRSample.Data;
 
@@ -17,6 +18,7 @@ namespace SignalRSample.Hubs
 			await Clients.All.SendAsync("NewMessageReceived", sender, message);
 		}
 
+		[Authorize]
 		public async Task SendPrivateMessage(string sender, string receiver, string message)
 		{
 			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.ToLower() == receiver.ToLower());
