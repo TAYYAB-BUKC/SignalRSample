@@ -20,6 +20,10 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton<IHouseTracker, HouseTracker>();
 builder.Services.AddSingleton<INotificationTracker, NotificationTracker>();
 
+// For Azure SignalR
+//var azureSignalRConnectionString = builder.Configuration.GetValue<string>("Azure:SignalRConnectionString");
+//builder.Services.AddSignalR().AddAzureSignalR(azureSignalRConnectionString);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
