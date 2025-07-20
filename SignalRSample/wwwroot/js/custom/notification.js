@@ -8,7 +8,7 @@ notificationConnection.on("UpdateNotificationListAndCount", (notificationList) =
 	$('#notificationCounter').text(notificationList.length);
 	var messages = '';
 	for (var i = 0; i < notificationList.length; i++) {
-		messages += `<i>${notificationList[i]}</i>`;
+		messages += `<li>${notificationList[i]}</li>`;
 	}
 	$('#messageList').html(messages);
 });
