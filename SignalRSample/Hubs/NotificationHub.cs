@@ -1,20 +1,25 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using SignalRSample.Services.Interfaces;
 
 namespace SignalRSample.Hubs
 {
 	public class NotificationHub : Hub
 	{
-		public List<string> Notifications { get; set; } = new List<string>();
-		
+		private readonly INotificationTracker _notificationTracker;
+		public NotificationHub(INotificationTracker notificationTracker)
+		{
+			_notificationTracker = notificationTracker;
+		}
+
 		public async Task AddNewNotification(string message)
 		{
-			Notifications.Add(message);
+			_notificationTracker.NotificationsList.Add(message);
 			await SentCurrentNotificationListToClients();
 		}
 
 		public async Task SentCurrentNotificationListToClients()
 		{
-			await Clients.All.SendAsync("UpdateNotificationListAndCount", Notifications);
+			await Clients.All.SendAsync("UpdateNotificationListAndCount", _notificationTracker.NotificationsList);
 		}
 	}
 }
