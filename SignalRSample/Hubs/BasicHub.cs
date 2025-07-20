@@ -46,6 +46,8 @@ namespace SignalRSample.Hubs
 			// If you need to send a notification to particular groups
 			//await Clients.Groups("GroupName", "GroupName").SendAsync("MethodName", "parameter");
 
+			// If you need to send a notification to a particular group but ignore the specific user
+			//await Clients.GroupExcept("GroupName", "ExcludedUserConnectionId").SendAsync("MethodName", "parameter");
 
 			return base.OnConnectedAsync();
 		}
