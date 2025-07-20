@@ -19,6 +19,7 @@ $('#sendButton').on("click", function () {
 
 function OnNotificationSuccessConnection() {
 	console.log("Connected to Notification Hub");
+	notificationConnection.send("SentCurrentNotificationListToClients");
 }
 
 function OnNotificationFailedConnection() {
