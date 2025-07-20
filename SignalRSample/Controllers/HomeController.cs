@@ -47,5 +47,10 @@ namespace SignalRSample.Controllers
             );
 			return Accepted();
 		}
+
+		public IActionResult Notification()
+		{
+			return View();
+		}
 	}
 }
