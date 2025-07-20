@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using SignalRSample.Services.Interfaces;
 
 namespace SignalRSample.Hubs
 {
 	public class HouseHub : Hub
 	{
-		public List<string> HousesJoined { get; set; } = new List<string>();
+		private readonly IHouseTracker _houseTracker;
+		public HouseHub(IHouseTracker houseTracker)
+		{
+			_houseTracker = houseTracker;
+		}
 
 		public async Task JoinHouse(string houseName)
 		{
 			var houseKey = $"{Context.ConnectionId}:{houseName}";
-			if(!HousesJoined.Contains(houseKey))
+			if(!_houseTracker.HousesJoined.Contains(houseKey))
 			{
-				HousesJoined.Add(houseKey);
+				_houseTracker.HousesJoined.Add(houseKey);
 
 				var clientHouses = GetClientHouses(Context.ConnectionId);
 				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, true);
@@ -22,16 +27,16 @@ namespace SignalRSample.Hubs
 
 		private string GetClientHouses(string connectionId)
 		{
-			return String.Join(", ", HousesJoined.Where(h => h.Contains(connectionId))
+			return String.Join(", ", _houseTracker.HousesJoined.Where(h => h.Contains(connectionId))
 				.ToList().Select(h => h.Split(":")[1]));
 		}
 
 		public async Task LeaveHouse(string houseName)
 		{
 			var houseKey = $"{Context.ConnectionId}:{houseName}";
-			if (HousesJoined.Contains(houseKey))
+			if (_houseTracker.HousesJoined.Contains(houseKey))
 			{
-				HousesJoined.Remove(houseKey);
+				_houseTracker.HousesJoined.Remove(houseKey);
 
 				var clientHouses = GetClientHouses(Context.ConnectionId);
 				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, false);
