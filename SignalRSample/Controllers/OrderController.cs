@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SignalRSample.Data;
+using SignalRSample.Hubs;
 using SignalRSample.Models;
 
 namespace SignalRSample.Controllers
@@ -8,9 +10,11 @@ namespace SignalRSample.Controllers
 	public class OrderController : Controller
 	{
 		private readonly ApplicationDbContext _dbContext;
-		public OrderController(ApplicationDbContext dbContext)
+		private readonly IHubContext<OrderHub> _orderHubContext;
+		public OrderController(ApplicationDbContext dbContext, IHubContext<OrderHub> orderHubContext)
 		{
 			_dbContext = dbContext;
+			_orderHubContext = orderHubContext;
 		}
 
 		[ActionName("Order")]
@@ -39,6 +43,7 @@ namespace SignalRSample.Controllers
 		{
 			await _dbContext.Orders.AddAsync(order);
 			await _dbContext.SaveChangesAsync();
+			await _orderHubContext.Clients.All.SendAsync("NewOrderReceived");
 			return RedirectToAction(nameof(Order));
 		}
 
