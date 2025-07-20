@@ -102,20 +102,20 @@ houseConnection.on("SubscriptionStatus", (joinedGroups, houseName, hasSubscribed
 	else {
 		switch (houseName) {
 			case "Gryffindor":
-				btn_gryffindor.style.display = "none";
-				btn_un_gryffindor.style.display = "";
+				btn_gryffindor.style.display = "";
+				btn_un_gryffindor.style.display = "none";
 				break;
 			case "Slytherin":
-				btn_slytherin.style.display = "none";
-				btn_un_slytherin.style.display = "";
+				btn_slytherin.style.display = "";
+				btn_un_slytherin.style.display = "none";
 				break;
 			case "Hufflepuff":
-				btn_hufflepuff.style.display = "none";
-				btn_un_hufflepuff.style.display = "";
+				btn_hufflepuff.style.display = "";
+				btn_un_hufflepuff.style.display = "none";
 				break;
 			case "Ravenclaw":
-				btn_ravenclaw.style.display = "none";
-				btn_un_ravenclaw.style.display = "";
+				btn_ravenclaw.style.display = "";
+				btn_un_ravenclaw.style.display = "none";
 				break;
 			default:
 				break;
