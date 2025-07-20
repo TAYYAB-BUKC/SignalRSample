@@ -13,8 +13,17 @@ namespace SignalRSample.Hubs
 			{
 				HousesJoined.Add(houseKey);
 
+				var clientHouses = GetClientHouses(Context.ConnectionId);
+				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, true);
+
 				await Groups.AddToGroupAsync(Context.ConnectionId, houseName);
 			}
+		}
+
+		private string GetClientHouses(string connectionId)
+		{
+			return String.Join(", ", HousesJoined.Where(h => h.Contains(connectionId))
+				.ToList().Select(h => h.Split(":")[1]));
 		}
 
 		public async Task LeaveHouse(string houseName)
@@ -23,6 +32,9 @@ namespace SignalRSample.Hubs
 			if (HousesJoined.Contains(houseKey))
 			{
 				HousesJoined.Remove(houseKey);
+
+				var clientHouses = GetClientHouses(Context.ConnectionId);
+				await Clients.Caller.SendAsync("SubscriptionStatus", clientHouses, houseName, false);
 
 				await Groups.RemoveFromGroupAsync(Context.ConnectionId, houseName);
 			}
