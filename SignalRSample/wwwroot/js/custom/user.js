@@ -41,3 +41,18 @@ function OnSuccessConnection() {
 function OnFailedConnection() {
 	console.log("Failed to connect to HUB");
 }
+
+connection.onclose(function (error) {
+	console.error(error);
+	document.body.style.backgroundColor = "red";
+});
+
+connection.onreconnected(function (connectionId) {
+	console.error(connectionId);
+	document.body.style.backgroundColor = "green";
+});
+
+connection.onreconnecting(function (error) {
+	console.error(error);
+	document.body.style.backgroundColor = "orange";
+});
