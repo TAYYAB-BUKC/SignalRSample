@@ -15,7 +15,7 @@ let trigger_slytherin = document.getElementById("trigger_slytherin");
 let trigger_hufflepuff = document.getElementById("trigger_hufflepuff");
 let trigger_ravenclaw = document.getElementById("trigger_ravenclaw");
 
-var houseConnection = new signalR.CreateHubConnections().withUrl("/hubs/house").build();
+var houseConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/house").build();
 
 houseConnection.start().then(OnHouseSuccessConnection, OnHouseFailedConnection);
 
