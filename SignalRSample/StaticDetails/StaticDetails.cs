@@ -13,8 +13,8 @@
 		}
 
 		public static Dictionary<string, int> VoteCounts;
-		public const string VoterA = "Voter A";
-		public const string VoterB = "Voter B";
-		public const string VoterC = "Voter C";
+		public const string VoterA = "VoterA";
+		public const string VoterB = "VoterB";
+		public const string VoterC = "VoterC";
 	}
 }
