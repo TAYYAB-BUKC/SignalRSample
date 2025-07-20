@@ -51,5 +51,6 @@ app.MapRazorPages()
 app.MapHub<UserHub>("/hubs/user");
 app.MapHub<VotingHub>("/hubs/voting");
 app.MapHub<HouseHub>("/hubs/house");
+app.MapHub<NotificationHub>("/hubs/Notification");
 
 app.Run();
