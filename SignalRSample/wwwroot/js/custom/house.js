@@ -135,3 +135,24 @@ houseConnection.on("UnsubscriptionMessage", (message) => {
 houseConnection.on("ShowTriggeredHouseNotification", (houseName) => {
 	toastr.info(`New notification has been launched for ${houseName}.`);
 });
+
+// Trigger House events
+trigger_gryffindor.addEventListener("click", function (event) {
+	houseConnection.send("TriggerHouseNotification", "Gryffindor");
+	event.preventDefault();
+});
+
+trigger_slytherin.addEventListener("click", function (event) {
+	houseConnection.send("TriggerHouseNotification", "Slytherin");
+	event.preventDefault();
+});
+
+trigger_hufflepuff.addEventListener("click", function (event) {
+	houseConnection.send("TriggerHouseNotification", "Hufflepuff");
+	event.preventDefault();
+});
+
+trigger_ravenclaw.addEventListener("click", function (event) {
+	houseConnection.send("TriggerHouseNotification", "Ravenclaw");
+	event.preventDefault();
+});
