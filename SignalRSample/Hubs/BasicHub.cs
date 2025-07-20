@@ -33,6 +33,9 @@ namespace SignalRSample.Hubs
 			// If you need to add client to a group
 			//await Groups.AddToGroupAsync("Context.ConnectionId", "GroupName");
 
+			// If you need to remove a client from a group
+			//await Groups.RemoveFromGroupAsync("Context.ConnectionId", "GroupName");
+
 			return base.OnConnectedAsync();
 		}
 	}
