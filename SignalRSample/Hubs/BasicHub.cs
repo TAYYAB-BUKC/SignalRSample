@@ -43,6 +43,10 @@ namespace SignalRSample.Hubs
 			// If you need to send a notification to other clients in a group except request Initiator
 			//await Clients.OthersInGroup("GroupName").SendAsync("MethodName", "parameter");
 
+			// If you need to send a notification to particular groups
+			//await Clients.Groups("GroupName", "GroupName").SendAsync("MethodName", "parameter");
+
+
 			return base.OnConnectedAsync();
 		}
 	}
