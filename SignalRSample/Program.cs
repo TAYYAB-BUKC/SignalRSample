@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<IHouseTracker, HouseTracker>();
+builder.Services.AddSingleton<INotificationTracker, NotificationTracker>();
 
 var app = builder.Build();
 
