@@ -15,6 +15,7 @@ notificationConnection.on("UpdateNotificationListAndCount", (notificationList) =
 
 $('#sendButton').on("click", function () {
 	notificationConnection.send("AddNewNotification", $('#notificationInput').val());
+	$('#notificationInput').val('');
 });;
 
 function OnNotificationSuccessConnection() {
