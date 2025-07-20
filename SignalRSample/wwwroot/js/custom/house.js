@@ -131,3 +131,7 @@ houseConnection.on("NewSubscriptionMessage", (message) => {
 houseConnection.on("UnsubscriptionMessage", (message) => {
 	toastr.info(message);
 });
+
+houseConnection.on("ShowTriggeredHouseNotification", (houseName) => {
+	toastr.info(`New notification has been launched for ${houseName}.`);
+});
