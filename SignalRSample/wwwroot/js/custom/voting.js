@@ -1,6 +1,6 @@
 ﻿
 // Create Connection
-var connection = new signalR.HubConnectionBuilder()
+var votingConnection = new signalR.HubConnectionBuilder()
 	.configureLogging(signalR.LogLevel.Information)
 	.withUrl("/hubs/voting")
 	.build();
@@ -8,7 +8,7 @@ var connection = new signalR.HubConnectionBuilder()
 // Invoke HUB methods AKA Send Notification to HUB
 
 // Connect to methods that HUB invokes AKA Receive Notification from HUB
-connection.on("UpdateVotingStatus", (voterACount, voterBCount, voterCCount) => {
+votingConnection.on("UpdateVotingStatus", (voterACount, voterBCount, voterCCount) => {
 	$('#voterACounter').text(voterACount);
 	$('#voterBCounter').text(voterBCount);
 	$('#voterCCounter').text(voterCCount);
@@ -16,13 +16,13 @@ connection.on("UpdateVotingStatus", (voterACount, voterBCount, voterCCount) => {
 });
 
 // Start Connection
-connection.start().then(OnSuccessConnection, OnFailedConnection);
+votingConnection.start().then(OnVotingHubSuccessConnection, OnVotingHubFailedConnection);
 
-function OnSuccessConnection() {
+function OnVotingHubSuccessConnection() {
 	console.log("Successfully connected to Voting HUB");
 	WindowLoaded();
 }
 
-function OnFailedConnection() {
+function OnVotingHubFailedConnection() {
 	console.log("Failed to connect to Voting HUB");
 }
