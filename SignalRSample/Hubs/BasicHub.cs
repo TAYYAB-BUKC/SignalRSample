@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System.Reflection.Metadata;
 
 namespace SignalRSample.Hubs
 {
@@ -35,6 +36,9 @@ namespace SignalRSample.Hubs
 
 			// If you need to remove a client from a group
 			//await Groups.RemoveFromGroupAsync("Context.ConnectionId", "GroupName");
+
+			// If you need to send a notification to a group
+			//await Clients.Groups("GroupName").SendAsync("MethodName", "parameter");
 
 			return base.OnConnectedAsync();
 		}
