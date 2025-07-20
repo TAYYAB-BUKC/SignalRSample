@@ -29,6 +29,10 @@ namespace SignalRSample.Hubs
 
 			// If you need to send notification to particular users
 			//await Clients.Users("UserIdOfClient", "UserIdOfClient").SendAsync("MethodName", parameter);
+
+			// If you need to add client to a group
+			//await Groups.AddToGroupAsync("Context.ConnectionId", "GroupName");
+
 			return base.OnConnectedAsync();
 		}
 	}
