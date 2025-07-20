@@ -2,6 +2,7 @@
 // Create Connection
 var connection = new signalR.HubConnectionBuilder()
 							.configureLogging(signalR.LogLevel.Information)
+							.withAutomaticReconnect()
 							.withUrl("/hubs/user", signalR.HttpTransportType.WebSockets)
 							.build();
 
