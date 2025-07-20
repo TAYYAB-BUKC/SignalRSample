@@ -52,5 +52,15 @@ namespace SignalRSample.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult Voting()
+		{
+			return View();
+		}
+
+		public IActionResult House()
+		{
+			return View();
+		}
 	}
 }

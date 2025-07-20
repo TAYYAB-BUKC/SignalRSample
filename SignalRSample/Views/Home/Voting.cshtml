@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Voting Page";
+}
+
+<div class="container">
+    <div class="row border p-1">
+        <h3>Voting </h3>
+        <div class="col-4">
+            <div>Voter A Count - <span id="voterACounter"></span></div>
+        </div>
+        <div class="col-4">
+            <div>Voter B Count - <span id="voterBCounter"></span></div>
+        </div>
+        <div class="col-4">
+            <div>Voter C Count - <span id="voterCCounter"></span></div>
+
+        </div>
+        <hr />
+        <p>Url to Votes:</p>
+        <div>1. <a target="_blank" href="https://localhost:7224/Home/AddVote?voterID=VoterA">Vote For A</a></div>
+        <div>2. <a target="_blank" href="https://localhost:7224/Home/AddVote?voterID=VoterB">Vote For B</a></div>
+        <div>3. <a target="_blank" href="https://localhost:7224/Home/AddVote?voterID=VoterC">Vote For C</a></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script asp-append-version="true" type="text/javascript" src="~/js/custom/voting.js"></script>
+}
