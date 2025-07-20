@@ -70,3 +70,54 @@ btn_un_ravenclaw.addEventListener("click", function (event) {
 	houseConnection.send("LeaveHouse", "Ravenclaw");
 	event.preventDefault();
 });
+
+// Toggle buttons based on Subcription/UnSubcription
+
+houseConnection.on("SubscriptionStatus", (joinedGroups, houseName, hasSubscribed) => {
+	lbl_houseJoined.innerText = joinedGroups;
+
+	if (hasSubscribed) {
+		switch (houseName) {
+			case "Gryffindor":
+				btn_gryffindor.style.display = "none";
+				btn_un_gryffindor.style.display = "";
+				break;
+			case "Slytherin":
+				btn_slytherin.style.display = "none";
+				btn_un_slytherin.style.display = "";
+				break;
+			case "Hufflepuff":
+				btn_hufflepuff.style.display = "none";
+				btn_un_hufflepuff.style.display = "";
+				break;
+			case "Ravenclaw":
+				btn_ravenclaw.style.display = "none";
+				btn_un_ravenclaw.style.display = "";
+				break;
+			default:
+				break;
+		}
+	}
+	else {
+		switch (houseName) {
+			case "Gryffindor":
+				btn_gryffindor.style.display = "none";
+				btn_un_gryffindor.style.display = "";
+				break;
+			case "Slytherin":
+				btn_slytherin.style.display = "none";
+				btn_un_slytherin.style.display = "";
+				break;
+			case "Hufflepuff":
+				btn_hufflepuff.style.display = "none";
+				btn_un_hufflepuff.style.display = "";
+				break;
+			case "Ravenclaw":
+				btn_ravenclaw.style.display = "none";
+				btn_un_ravenclaw.style.display = "";
+				break;
+			default:
+				break;
+		}
+	}
+});
