@@ -9,6 +9,10 @@ advanceChatConnection.on("UserDisConnected", function (userEmail) {
 	AddMessage(`${userEmail} has closed a connection!`);
 });
 
+advanceChatConnection.on("NewRoomAdded", function (userEmail, newRoomName) {
+    AddMessage(`${userEmail} has created a new room named ${newRoomName}`);
+});
+
 function AddMessage(message) {
 	if (message != '' && message != null) {
 		$('#messagesList').append(`<li>${message}</li>`);
@@ -40,6 +44,7 @@ function AddNewRoom() {
         cache: false,
         success: function (json) {
             /*ADD ROOM COMPLETED SUCCESSFULLY*/
+            advanceChatConnection.send("NewRoomAdded", json.name);
             $('#createRoomName').val('');
         },
         error: function (xhr) {
