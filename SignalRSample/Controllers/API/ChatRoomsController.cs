@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SignalRSample.Data;
 using SignalRSample.Models;
+using System.Security.Claims;
 
 namespace SignalRSample.Controllers.API
 {
@@ -51,5 +53,23 @@ namespace SignalRSample.Controllers.API
 
             return NoContent();
         }
-    }
+
+		[HttpGet]
+		[Route("/[controller]/GetChatUsers")]
+		public async Task<ActionResult<object>> GetChatUsers()
+		{
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var users = await _context.Users.ToListAsync();
+            if(users is null)
+            {
+                return NotFound();
+            }
+
+			return users.Where(u => u.Id != userId).Select(u => new
+            {
+                u.Id,
+                u.UserName
+            }).ToList();
+		}
+	}
 }
