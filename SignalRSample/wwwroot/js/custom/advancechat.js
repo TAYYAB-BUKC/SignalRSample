@@ -6,7 +6,7 @@ advanceChatConnection.on("UserConnected", function (userEmail) {
 });
 
 advanceChatConnection.on("UserDisConnected", function (userEmail) {
-	AddMessage(`${userEmail} has clsoed a connection!`);
+	AddMessage(`${userEmail} has closed a connection!`);
 });
 
 function AddMessage(message) {
