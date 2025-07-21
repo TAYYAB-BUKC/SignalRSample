@@ -1,20 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using SignalRSample.Data;
 using SignalRSample.Hubs;
 using SignalRSample.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace SignalRSample.Controllers
 {
 	public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHubContext<VotingHub> _votingHubContext; 
+        private readonly IHubContext<VotingHub> _votingHubContext;
+		private readonly ApplicationDbContext _dbContext;
 
-		public HomeController(ILogger<HomeController> logger, IHubContext<VotingHub> votingHubContext)
+		public HomeController(ILogger<HomeController> logger, IHubContext<VotingHub> votingHubContext, ApplicationDbContext dbContext)
         {
             _logger = logger;
             _votingHubContext = votingHubContext;
+			_dbContext = dbContext;
 		}
 
         public IActionResult Index()
@@ -68,9 +73,15 @@ namespace SignalRSample.Controllers
 			return View();
 		}
 
-		public IActionResult AdvanceChatApp()
+		public async Task<IActionResult> AdvanceChatApp()
 		{
-			return View();
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			ChatViewModel viewModel = new ChatViewModel()
+			{
+				Rooms = await _dbContext.ChatRooms.ToListAsync(),
+				UserId = userId,
+			};
+			return View(viewModel);
 		}
 	}
 }
