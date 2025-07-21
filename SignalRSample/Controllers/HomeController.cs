@@ -67,5 +67,10 @@ namespace SignalRSample.Controllers
 		{
 			return View();
 		}
+
+		public IActionResult AdvanceChatApp()
+		{
+			return View();
+		}
 	}
 }
