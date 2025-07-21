@@ -11,6 +11,7 @@ advanceChatConnection.on("UserDisConnected", function (userEmail) {
 
 advanceChatConnection.on("NewRoomAdded", function (userEmail, newRoomName) {
     AddMessage(`${userEmail} has created a new room named ${newRoomName}`);
+    FillRoomDropDown();
 });
 
 function AddMessage(message) {
