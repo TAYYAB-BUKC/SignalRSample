@@ -47,3 +47,52 @@ function AddNewRoom() {
         }
     });
 }
+
+$(function () {
+    FillRoomDropDown();
+    FillUserDropDown();
+});
+
+function FillUserDropDown() {
+    $.getJSON('/ChatRooms/GetChatUsers')
+        .done(function (json) {
+            var ddlSelUser = document.getElementById("ddlSelUser");
+            ddlSelUser.innerText = null;
+
+            json.forEach(function (item) {
+                var newOption = document.createElement("option");
+                newOption.text = item.userName;
+                newOption.value = item.id;
+                ddlSelUser.add(newOption);
+            });
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            console.log("Request Failed: " + jqxhr.detail);
+        });
+}
+
+function FillRoomDropDown() {
+    $.getJSON('/ChatRooms/GetChatRooms')
+        .done(function (json) {
+            var ddlDelRoom = document.getElementById("ddlDelRoom");
+            var ddlSelRoom = document.getElementById("ddlSelRoom");
+
+            ddlDelRoom.innerText = null;
+            ddlSelRoom.innerText = null;
+
+            json.forEach(function (item) {
+                var newOption = document.createElement("option");
+                newOption.text = item.name;
+                newOption.value = item.id;
+                ddlDelRoom.add(newOption);
+
+                var newOption1 = document.createElement("option");
+                newOption1.text = item.name;
+                newOption1.value = item.id;
+                ddlSelRoom.add(newOption1);
+            });
+        })
+        .fail(function (jqxhr, textStatus, error) {
+            console.log("Request Failed: " + jqxhr.detail);
+        });
+}
