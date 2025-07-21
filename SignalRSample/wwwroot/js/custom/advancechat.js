@@ -7,6 +7,10 @@ advanceChatConnection.on("NewUserConnected", function (userId, userEmail, isUser
 	}
 });
 
+advanceChatConnection.on("UserDisConnected", function (userEmail) {
+	AddMessage(`${userEmail} has clsoed a connection!`);
+});
+
 function AddMessage(message) {
 	if (message != '' && message != null) {
 		$('#messagesList').append(`<li>${message}</li>`);
