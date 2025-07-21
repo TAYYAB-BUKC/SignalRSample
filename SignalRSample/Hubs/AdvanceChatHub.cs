@@ -19,7 +19,7 @@ namespace SignalRSample.Hubs
 			if(!string.IsNullOrWhiteSpace(userId))
 			{
 				var userEmail = (await _dbContext.Users.FindAsync(userId))?.Email;
-				await Clients.Users(HubHelper.OnlineUsers()).SendAsync("NewUserConnected", userId, userEmail, HubHelper.HasUserPreviousConnection(userId));
+				await Clients.Users(HubHelper.OnlineUsers()).SendAsync("UserConnected", userEmail);
 				HubHelper.AddUserConnection(userId, Context.ConnectionId);
 			}
 			return base.OnConnectedAsync();

@@ -1,10 +1,8 @@
 ﻿
 var advanceChatConnection = new signalR.HubConnectionBuilder().withUrl("/hubs/advancechat").build();
 
-advanceChatConnection.on("NewUserConnected", function (userId, userEmail, isUserHasOldConnection) {
-	if (!isUserHasOldConnection) {
-		AddMessage(`${userEmail} is online!`);
-	}
+advanceChatConnection.on("UserConnected", function (userEmail) {
+	AddMessage(`${userEmail} has open a connection!`);
 });
 
 advanceChatConnection.on("UserDisConnected", function (userEmail) {
