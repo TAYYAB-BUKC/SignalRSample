@@ -85,5 +85,16 @@ namespace SignalRSample.Controllers
 			};
 			return View(viewModel);
 		}
+
+		public async Task<IActionResult> MoreAdvanceChatApp()
+		{
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			ChatViewModel viewModel = new ChatViewModel()
+			{
+				Rooms = await _dbContext.ChatRooms.ToListAsync(),
+				UserId = userId,
+			};
+			return View(viewModel);
+		}
 	}
 }

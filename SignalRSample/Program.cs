@@ -60,5 +60,6 @@ app.MapHub<NotificationHub>("/hubs/Notification");
 app.MapHub<BasicChatHub>("/hubs/basicchat");
 app.MapHub<OrderHub>("/hubs/order");
 app.MapHub<AdvanceChatHub>("/hubs/advancechat");
+app.MapHub<MoreAdvanceChatHub>("/hubs/moreadvancechat");
 
 app.Run();
