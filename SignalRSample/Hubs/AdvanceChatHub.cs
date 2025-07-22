@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using SignalRSample.Data;
 using SignalRSample.Helpers;
 using System.Security.Claims;
@@ -74,11 +75,13 @@ namespace SignalRSample.Hubs
 
 		public async Task SendPrivateMessage(string receiverEmail, string message)
 		{
-			var userId = Context?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
-			if (!string.IsNullOrWhiteSpace(userId))
+			var senderId = Context?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+			if (!string.IsNullOrWhiteSpace(senderId))
 			{
-				var senderEmail = (await _dbContext.Users.FindAsync(userId))?.Email;
-				await Clients.All.SendAsync("ReceivePrivateMessage", senderEmail, receiverEmail, message);
+				var senderEmail = (await _dbContext.Users.FindAsync(senderId))?.Email;
+				var receiverId = (await _dbContext.Users.FirstOrDefaultAsync(u=> u.Email == receiverEmail))?.Id;
+				var users = new string[] { senderId, receiverId };
+				await Clients.Users(users).SendAsync("ReceivePrivateMessage", senderEmail, receiverEmail, message);
 			}
 		}
 	}
