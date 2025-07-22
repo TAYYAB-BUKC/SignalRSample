@@ -68,7 +68,7 @@ namespace SignalRSample.Hubs
 			if (!string.IsNullOrWhiteSpace(userId))
 			{
 				var userEmail = (await _dbContext.Users.FindAsync(userId))?.Email;
-				await Clients.All.SendAsync("SendPublicMessage", userEmail, roomName, message);
+				await Clients.All.SendAsync("ReceivePublicMessage", userEmail, roomName, message);
 			}
 		}
 	}

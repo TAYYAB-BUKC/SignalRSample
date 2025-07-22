@@ -19,6 +19,10 @@ advanceChatConnection.on("RoomDeleted", function (userEmail, roomName) {
     FillRoomDropDown();
 });
 
+advanceChatConnection.on("ReceivePublicMessage", function (userEmail, roomName, message) {
+    AddMessage(`[Public Message - ${roomName}] - ${userEmail} sent ${message}`);
+});
+
 function AddMessage(message) {
 	if (message != '' && message != null) {
 		$('#messagesList').append(`<li>${message}</li>`);
