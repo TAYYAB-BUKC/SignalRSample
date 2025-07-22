@@ -16,6 +16,7 @@ advanceChatConnection.on("NewRoomAdded", function (userEmail, newRoomName) {
 
 advanceChatConnection.on("RoomDeleted", function (userEmail, roomName) {
     AddMessage(`${userEmail} has deleted a room named ${roomName}`);
+    FillRoomDropDown();
 });
 
 function AddMessage(message) {
