@@ -134,3 +134,14 @@ function DeleteRoom() {
         }
     });
 }
+
+function SendPublicMessage() {
+    let roomName = $('#ddlSelRoom option:selected').text();
+    let message = $('#txtPublicMessage').val();
+
+    if (message == null && message == '') {
+        return;
+    }
+
+    advanceChatConnection.send("SendPublicMessage", roomName, message);
+}
