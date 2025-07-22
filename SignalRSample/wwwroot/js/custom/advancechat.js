@@ -23,6 +23,10 @@ advanceChatConnection.on("ReceivePublicMessage", function (userEmail, roomName, 
     AddMessage(`[Public Message - ${roomName}] - ${userEmail} sent ${message}`);
 });
 
+advanceChatConnection.on("ReceivePrivateMessage", function (senderEmail, receiverEmail, message) {
+    AddMessage(`[Private Message to ${receiverEmail}] - ${senderEmail} sent ${message}`);
+});
+
 function AddMessage(message) {
 	if (message != '' && message != null) {
 		$('#messagesList').append(`<li>${message}</li>`);
@@ -151,12 +155,12 @@ function SendPublicMessage() {
 }
 
 function SendPrivateMessage() {
-    let user = $('#ddlSelUser option:selected').text();
+    let receiverEmail = $('#ddlSelUser option:selected').text();
     let message = $('#txtPrivateMessage').val();
 
-    if ((message == null && message == '') || (user == null && user == '')) {
+    if ((message == null && message == '') || (receiverEmail == null && receiverEmail == '')) {
         return;
     }
 
-    advanceChatConnection.send("SendPrivateMessage", user, message);
+    advanceChatConnection.send("SendPrivateMessage", receiverEmail, message);
 }
