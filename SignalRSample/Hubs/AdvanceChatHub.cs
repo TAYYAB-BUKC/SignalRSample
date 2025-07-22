@@ -51,5 +51,15 @@ namespace SignalRSample.Hubs
 				await Clients.All.SendAsync("NewRoomAdded", userEmail, roomName);
 			}
 		}
+
+		public async Task RoomDeleted(string roomName)
+		{
+			var userId = Context?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+			if (!string.IsNullOrWhiteSpace(userId))
+			{
+				var userEmail = (await _dbContext.Users.FindAsync(userId))?.Email;
+				await Clients.All.SendAsync("RoomDeleted", userEmail, roomName);
+			}
+		}
 	}
 }
