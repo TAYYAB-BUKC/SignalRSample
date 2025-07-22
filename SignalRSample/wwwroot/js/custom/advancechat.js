@@ -102,3 +102,29 @@ function FillRoomDropDown() {
             console.log("Request Failed: " + jqxhr.detail);
         });
 }
+
+function DeleteRoom() {
+    let id = $('#ddlDelRoom option:selected').val();
+
+    if (id == null && id == '') {
+        return;
+    }
+
+    /*POST*/
+    $.ajax({
+        url: `/ChatRooms/DeleteChatRoom/${id}`,
+        dataType: "json",
+        type: "DELETE",
+        contentType: 'application/json; charset=utf-8',
+        async: true,
+        processData: false,
+        cache: false,
+        success: function (json) {
+            /*DELETE ROOM COMPLETED SUCCESSFULLY*/
+            toastr.success("Room deleted successfully");
+        },
+        error: function (xhr) {
+            alert('error');
+        }
+    });
+}
