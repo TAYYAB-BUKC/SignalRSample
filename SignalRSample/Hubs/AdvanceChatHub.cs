@@ -71,5 +71,15 @@ namespace SignalRSample.Hubs
 				await Clients.All.SendAsync("ReceivePublicMessage", userEmail, roomName, message);
 			}
 		}
+
+		public async Task SendPrivateMessage(string receiverEmail, string message)
+		{
+			var userId = Context?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+			if (!string.IsNullOrWhiteSpace(userId))
+			{
+				var senderEmail = (await _dbContext.Users.FindAsync(userId))?.Email;
+				await Clients.All.SendAsync("ReceivePrivateMessage", senderEmail, receiverEmail, message);
+			}
+		}
 	}
 }
