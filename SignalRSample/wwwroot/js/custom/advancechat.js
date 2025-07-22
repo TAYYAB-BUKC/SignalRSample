@@ -125,6 +125,7 @@ function DeleteRoom() {
         cache: false,
         success: function (json) {
             /*DELETE ROOM COMPLETED SUCCESSFULLY*/
+            advanceChatConnection.send("RoomDeleted", $('#ddlDelRoom option:selected').text());
             toastr.success("Room deleted successfully");
         },
         error: function (xhr) {
