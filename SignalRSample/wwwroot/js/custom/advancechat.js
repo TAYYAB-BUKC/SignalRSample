@@ -149,3 +149,14 @@ function SendPublicMessage() {
 
     advanceChatConnection.send("SendPublicMessage", roomName, message);
 }
+
+function SendPrivateMessage() {
+    let user = $('#ddlSelUser option:selected').text();
+    let message = $('#txtPrivateMessage').val();
+
+    if ((message == null && message == '') || (user == null && user == '')) {
+        return;
+    }
+
+    advanceChatConnection.send("SendPrivateMessage", user, message);
+}
